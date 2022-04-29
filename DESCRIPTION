@@ -5,7 +5,7 @@ Authors@R:
     person(given ="Building R Packages", role="aut")
     person(given = "Hannah", family = "Liyanarachchi", email = "hliyanar@yahoo.com", role = "cre")
 Description: Reads in FARS (Fatality Analysis Reporting System) files containing FARS data. 
-    It can also create summaries of the data and plot these summaries by US state on a map. 
+    It can also create a correctly formatted file name, create tibbles and summaries of the data across multiple years, and plot accident data by US state on a map. 
 License: GPL (>= 3)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
