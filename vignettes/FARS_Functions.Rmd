@@ -24,7 +24,7 @@ library(knitr)
 
 **fars.functions Package Overview** 
 
-This package handles FARS (Fatal Accident Reporting System) data. 
+This package handles FARS (Fatality Analysis Reporting System) data. 
 It contains several functions which can read in, summarize, and map FARS data. 
 
 The `make_filename` function creates a file name of the correct format for a specific year. The `fars_read` function can then be used to read in the FARS data corresponding to that file name. If a file name in the correct format is known, it can be directly inputted into `fars_read`. 

@@ -1,0 +1,28 @@
+Package: fars.functions
+Title: Process, Summarize, and Map FARS Data 
+Version: 0.0.0.9000
+Authors@R: 
+    person("Building R Packages", role="aut")
+    person("Hannah", "Liyanarachchi", "hliyanar@yahoo.com", role = "cre")
+Description: Reads in FARS (Fatality Analysis Reporting System) files containing FARS data. 
+    It can also create summaries of the data and plot these summaries by US state on a map. 
+License: GPL (>= 3)
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.2
+Imports: 
+    dplyr,
+    graphics, 
+    magrittr,
+    maps,
+    tibble,
+    tidyr
+Suggests: 
+    knitr,
+    rmarkdown,
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
+Depends: 
+    R (>= 2.10)
+LazyData: true
+VignetteBuilder: knitr
