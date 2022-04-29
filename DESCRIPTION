@@ -2,8 +2,8 @@ Package: fars.functions
 Title: Process, Summarize, and Map FARS Data 
 Version: 0.0.0.9000
 Authors@R: 
-    person("Building R Packages", role="aut")
-    person("Hannah", "Liyanarachchi", "hliyanar@yahoo.com", role = "cre")
+    person(given ="Building R Packages", role="aut")
+    person(given = "Hannah", family = "Liyanarachchi", email = "hliyanar@yahoo.com", role = "cre")
 Description: Reads in FARS (Fatality Analysis Reporting System) files containing FARS data. 
     It can also create summaries of the data and plot these summaries by US state on a map. 
 License: GPL (>= 3)
