@@ -1,0 +1,77 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# fars.functions
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+The goal of fars.functions is to read in, summarize, and map FARS (Fatality Analysis Reporting System) data on car accidents in the United States. 
+
+## Installation
+
+You can install the development version of fars.functions in R by entering the following into the R console: 
+
+```{r}
+ #library(devtools)
+ #install_github("haliyan/fars.functions")
+ library(fars.functions)
+```
+
+Note that the above code requires that the `devtools` package be installed. If you do not already have that package installed, install it using `install.packages("devtools")`. 
+
+**Examples**
+
+The fars.functions package function `make_filename` creates a FARS file name of the correct format for a certain year supplied by the user. 
+This format is `accident_X.csv.bz2`, where X is the user-supplied year:
+
+```{r}
+make_filename("2013")
+```
+
+
+The function `fars_read` reads in a FARS file of a certain file name. 
+```{r}
+fars_read("accident_2013.csv.bz2")
+```
+
+This function can also be used together with `make_filename` and the pipe operator `%>%` from the `magrittr` package. 
+
+```{r}
+library(magrittr)
+make_filename("2013") %>% 
+  fars_read()
+```
+
+The `fars_read_years` takes a list or vector of years and produces a list of tibbles. Each tibble contains the months in one of the years in the supplied vector of years. 
+
+```{r}
+fars_read_years(c("2013","2014"))
+```
+
+The `fars_summarize_years` function also takes a list or vector of years and produces a tibble. The rows of the tibble represent the 12 months in a year. The columns of the tibble are the years that were supplied to the function. The values contained in the tibble are the numbers of accidents in a particular month of a particular year. 
+
+```{r}
+fars_summarize_years(c("2013","2014"))
+```
+
+The `fars_map_state` function creates a map of accidents in a given state in a given year. For example, the following code creates a map of the accidents in the state of Wisconsin in 2014:
+
+```{r}
+fars_map_state(55, 2014)
+```
+
+**License**
+GPL 
