@@ -1,0 +1,125 @@
+---
+title: "FARS_Functions"
+authors: Hannah Liyanarachchi
+date: 
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{FARS_Functions}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup, message=FALSE, warning=FALSE}
+library(fars.functions)
+library(dplyr)
+library(knitr)
+```
+
+**fars.functions Package Overview** 
+
+This package handles FARS (Fatal Accident Reporting System) data. 
+It contains several functions which can read in, summarize, and map FARS data. 
+
+The `make_filename` function creates a file name of the correct format for a specific year. The `fars_read` function can then be used to read in the FARS data corresponding to that file name. If a file name in the correct format is known, it can be directly inputted into `fars_read`. 
+
+For example, the following output can be obtained either via running `make_filename("2014") %>% fars_read() %>% head(5)` or `fars_read("accident_2014.csv.bz2") %>%  head(5)`.
+
+```{r, echo=FALSE}
+make_filename("2014") %>% 
+  fars_read() %>% 
+  head(5)
+```
+
+The `fars_read_years` function and the `fars_summarize_years` function read in accident data from a list of years and summarize it, respectively. 
+
+```{r}
+fars_read_years(c("2013","2014")) %>% 
+  lapply(head)
+
+fars_summarize_years(c("2013","2014"))
+```
+
+
+Finally, the `fars_map_state` function creates a map of accident locations in a specified state in a specified year. 
+For example, the following code generates a map of the accident locations in state 1 (Alabama) in 2015. 
+
+```{r}
+fars_map_state(1,2015)
+```
+
+Note that the `fars_map_state` function requires that a state number be inputted to produce the map. 
+ 
+A table of state numbers and names is shown below: 
+
+```{r,echo=FALSE}
+addtls<-c("American Samoa", "Canal Zone", "District of Columbia", "Guam", "Puerto Rico", "Virgin Islands")
+state.name<-c(state.name, addtls) %>% 
+  sort() %>% 
+  replace(c(51,52), .[c(52,51)])
+  
+  
+  
+state.name<-data.frame(StateNumber = 1:56, StateName = state.name)
+kable(state.name)
+  
+```
+
+As shown above, some "state numbers" actually correspond to international territories of the US.
+Supplying these state numbers to the `fars_map_state` function will produce an invalid state number error. 
+A table of these international territories and their numbers is shown below: 
+
+```{r, echo=FALSE}
+state.name %>% 
+  filter(StateName %in% addtls & StateName != "District of Columbia") %>%
+  kable(.)
+```
+
+There is also a state number assigned to the District of Columbia although it is not technically a state. This number will not generate an error if it is supplied to `fars_map_state`; as long as accident data is available for the given year, a map of DC's accidents will be printed. 
+
+Supplying the state numbers for Alaska and Hawaii will result in an error as these states fall out of bounds (since they aren't part of the contiguous United States). 
+
+
+**Note on FARS Data**
+
+This package includes 3 files containing raw FARS data from the years 2013, 2014, and 2015. 
+
+*FARS 2013 Data*
+
+`accident_2013.csv.bz2`
+A tibble with 30,202 rows and 50 columns. 
+
+*FARS 2014 Data*
+
+`accident_2014.csv.bz2`
+A tibble with 30,056 rows and 50 columns. 
+
+*FARS 2014 Data*
+
+`accident_2015.csv.bz2`
+A tibble with 32,166 rows and 52 columns. 
+
+The FARS data from 2013 and 2014 contain the same columns: 
+
+```{r, echo=FALSE}
+sapply(fars_read("accident_2013.csv.bz2"), class) %>% 
+  as.data.frame() %>% 
+  kable(col.names="Class")
+```
+
+The FARS data from 2015 does not contain the `ROAD_FNC` column from the 2013 and 2014 data. It also contains 3 additional columns: 
+
+```{r, echo=FALSE}
+sapply(fars_read("accident_2015.csv.bz2"), class) %>% 
+  as.data.frame() %>% 
+  slice(c(19,20,21)) %>%
+  kable(col.names = "Class")
+```
+
+Data are from the US National Highway Traffic Safety Administration's Fatality Analysis Reporting System (FARS). 
