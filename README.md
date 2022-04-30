@@ -12,18 +12,16 @@ States.
 
 ## Installation
 
-You can install the development version of fars.functions in R by
-entering the following into the R console:
+You can install the development version of `fars.functions` in R by
+entering `install_github("haliyan/fars.functions")` into the console.
 
-``` r
- #library(devtools)
- #install_github("haliyan/fars.functions")
- library(fars.functions)
-```
+*Note: Using the* `install_github` *function requires that the*
+`devtools` *package be installed and loaded.* `devtools` *can be
+installed using* `install.packages("devtools")` *and loaded using*
+`library(devtools)`
 
-Note that the above code requires that the `devtools` package be
-installed. If you do not already have that package installed, install it
-using `install.packages("devtools")`.
+Once the `fars.functions` package is installed, load it using
+`library(fars.functions)`.
 
 **Examples**
 
@@ -36,7 +34,8 @@ make_filename("2013")
 #> [1] "accident_2013.csv.bz2"
 ```
 
-The function `fars_read` reads in a FARS file of a certain file name.
+The function `fars_read` reads in a FARS file of a certain file name and
+creates a tibble of the data.
 
 ``` r
 fars_read("accident_2013.csv.bz2")
@@ -65,7 +64,8 @@ fars_read("accident_2013.csv.bz2")
 ```
 
 This function can also be used together with `make_filename` and the
-pipe operator `%>%` from the `magrittr` package.
+pipe operator `%>%` from the `magrittr` package, especially if the
+correct file name format is not known.
 
 ``` r
 library(magrittr)
@@ -97,7 +97,8 @@ make_filename("2013") %>%
 
 The `fars_read_years` takes a list or vector of years and produces a
 list of tibbles. Each tibble contains the months in one of the years in
-the supplied vector of years.
+the supplied vector of years. The number of rows for each month
+represents the number of accidents that occurred in that month.
 
 ``` r
 fars_read_years(c("2013","2014"))
@@ -135,10 +136,10 @@ fars_read_years(c("2013","2014"))
 ```
 
 The `fars_summarize_years` function also takes a list or vector of years
-and produces a tibble. The rows of the tibble represent the 12 months in
-a year. The columns of the tibble are the years that were supplied to
-the function. The values contained in the tibble are the numbers of
-accidents in a particular month of a particular year.
+and produces a single tibble. The rows of the tibble represent the 12
+months in a year. The columns of the tibble are the years that were
+supplied to the function. The values contained in the tibble are the
+numbers of accidents in a particular month of a particular year.
 
 ``` r
 fars_summarize_years(c("2013","2014"))
@@ -164,14 +165,26 @@ state in a given year. For example, the following code creates a map of
 the accidents in the state of Wisconsin in 2014:
 
 ``` r
-#png("exampleplot.png")
 fars_map_state(55, 2014)
 ```
 
 <img src="man/figures/README-unnamed-chunk-8-1.png" width="100%" />
 
-``` r
-#dev.off()
-```
+*Note: for some state numbers, the* `fars_map_state` *function will not
+work, for various reasons. A quick summary table of these is included
+below. For more details plus a full table of all 56 state numbers and
+corresponding state names, please see the package vignette.*
 
-**License** GPL
+| Numbers | Reasons                 |
+|--------:|:------------------------|
+|       2 | Alaska; out of bounds   |
+|       3 | American Samoa; no data |
+|       7 | Canal Zone; no data     |
+|      14 | Guam; no data           |
+|      15 | Hawaii; out of bounds   |
+|      43 | Puerto Rico; no data    |
+|      52 | Virgin Islands; no data |
+
+**License**
+
+GPL
