@@ -4,6 +4,8 @@
 # fars.functions
 
 <!-- badges: start -->
+
+[![R-CMD-check](https://github.com/haliyan/fars.functions/workflows/R-CMD-check/badge.svg)](https://github.com/haliyan/fars.functions/actions)
 <!-- badges: end -->
 
 The goal of fars.functions is to read in, summarize, and map FARS
@@ -165,7 +167,7 @@ state in a given year. For example, the following code creates a map of
 the accidents in the state of Wisconsin in 2014:
 
 ``` r
-fars_map_state(55, 2014)
+fars_map_state(55, 2014) 
 ```
 
 <img src="man/figures/README-unnamed-chunk-8-1.png" width="100%" />
