@@ -62,9 +62,8 @@ make_filename <- function(year) {
 #' It then reads in these files using the \code{fars_read} function and
 #' creates a list of tibbles which contain the months in each of the
 #' years.
-#' If the file name created from the year inputted does not correspond
-#' to an existing file containing data for said year, then an error is
-#' thrown.
+#' If the file name created from a year inputted does not correspond
+#' to an existing file containing data for said year, an error is thrown.
 #'
 #' @param years A list or vector of years.
 #'
@@ -104,9 +103,9 @@ fars_read_years <- function(years) {
 #' data frame returned by \code{fars_read_years} to obtain the number of
 #' accidents that occurred in each month for the years supplied to the
 #' \code{years} argument.
-#' It returns a tibble containing this information.
+#' It then returns a tibble containing this information.
 #'
-#' @param years A list or vector of years
+#' @param years A list or vector of years.
 #'
 #' @return A tibble containing the number of accidents in each month
 #'    for each of the years specified in the list of years supplied to
@@ -140,6 +139,9 @@ fars_summarize_years <- function(years) {
 #' will be printed.
 #' If a state does not exist which corresponds to the number inputted,
 #' an error will be thrown.
+#' An error will also be thrown if the state is out of bounds for
+#' plotting. This happens for the states of Alaska and Hawaii which are
+#' not part of the contiguous United States.
 #'
 #' @param state.num A numeric object or character string representing
 #'    the number of the state for which accidents should be mapped.
