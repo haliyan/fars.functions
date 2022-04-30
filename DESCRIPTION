@@ -15,6 +15,7 @@ Imports:
     graphics, 
     magrittr,
     maps,
+    readr,
     tibble,
     tidyr
 Suggests: 

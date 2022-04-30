@@ -18,6 +18,7 @@
 #' \dontrun{fars_read("accident_2013.csv.bz2")}
 #'
 #' @importFrom tibble as.tibble
+#' @importFrom readr read_csv
 #'
 #' @export
 fars_read <- function(filename) {
