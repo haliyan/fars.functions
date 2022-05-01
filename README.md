@@ -10,7 +10,58 @@
 
 The goal of fars.functions is to read in, summarize, and map FARS
 (Fatality Analysis Reporting System) data on car accidents in the United
-States.
+States. This package was created as part of the Coursera course
+“Building R Packages” by JHU.
+
+### VERY IMPORTANT NOTES FOR PEER REVIEWERS
+
+**PLEASE READ (2 NOTES BELOW)**
+
+**NOTE 1**
+
+**This package has a R-CMD-Check badge provided by GitHub Actions and
+not a Travis badge.**
+
+Since the time of the creation of the course, Travis CI has changed
+significantly. It is no longer as straightforward as outlined in the
+course materials to use Travis for open-source projects. My
+understanding is that using their services for open-source projects such
+as this one requires signing up for a plan/trial (which in turn requires
+disclosing credit card information to Travis, which I wish to avoid if
+at all possible) and applying for open source credits. See Travis’s
+statements on open source credits
+[here](https://docs.travis-ci.com/user/billing-faq/#what-if-i-am-building-open-source)
+and trial plan
+[here](https://docs.travis-ci.com/user/billing-overview/#free-trial-plan).
+
+**Due to these issues and as per the suggestion of R, I have used GitHub
+Actions instead of Travis to check my package.**
+
+You can verify that the log contains NO errors, warnings, or notes by
+going to the “Actions” tab in my GitHub repo and clicking on the TOP
+workflow (it should have a blue check mark beside it).
+
+**I am asking that you please, please be considerate of this situation
+when grading my work!**
+
+**NOTE 2**
+
+In order to pass the tests I set up in the tests sub directory, I had to
+make some changes to the original `fars_read` and `fars_summarize_years`
+functions.
+
+-   Changing the `dplyr::tbl_df()` function (which has been deprecated)
+    to the `tibble::as_tibble()` function in `fars.read`.
+
+-   Adding the line
+    `filename <- system.file("extdata", filename, package= "fars.functions"`
+    to `fars.read`.
+
+-   Changing `n()` to `dplyr::n()` in `fars_summarize_years`.
+
+Omitting these changes causes problems with running examples and tests,
+building the vignette, creating the README file, and passing checks.
+**No other changes have been made to the original code.**
 
 ## Installation
 
@@ -175,7 +226,10 @@ fars_map_state(55, 2014)
 *Note: for some state numbers, the* `fars_map_state` *function will not
 work, for various reasons. A quick summary table of these is included
 below. For more details plus a full table of all 56 state numbers and
-corresponding state names, please see the package vignette.*
+corresponding state names, please see the package vignette. You can
+instruct R to build the vignette when installing from GitHub by
+specifying* `build_vignettes=TRUE` *when installing with*
+`install.github()`.
 
 | Numbers | Reasons                 |
 |--------:|:------------------------|
