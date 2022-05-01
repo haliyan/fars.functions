@@ -39,7 +39,7 @@ Actions instead of Travis to check my package.**
 
 You can verify that the log contains NO errors, warnings, or notes by
 going to the “Actions” tab in my GitHub repo and clicking on the TOP
-workflow (it should have a blue check mark beside it).
+workflow run (it should have a blue check mark beside it).
 
 **I am asking that you please, please be considerate of this situation
 when grading my work!**
@@ -229,7 +229,7 @@ below. For more details plus a full table of all 56 state numbers and
 corresponding state names, please see the package vignette. You can
 instruct R to build the vignette when installing from GitHub by
 specifying* `build_vignettes=TRUE` *when installing with*
-`install.github()`.
+`install_github`.
 
 | Numbers | Reasons                 |
 |--------:|:------------------------|

@@ -33,7 +33,7 @@ Since the time of the creation of the course, Travis CI has changed significantl
 
 **Due to these issues and as per the suggestion of R, I have used GitHub Actions instead of Travis to check my package.**
 
-You can verify that the log contains NO errors, warnings, or notes by going to the "Actions" tab in my GitHub repo and clicking on the TOP workflow (it should have a blue check mark beside it). 
+You can verify that the log contains NO errors, warnings, or notes by going to the "Actions" tab in my GitHub repo and clicking on the TOP workflow run (it should have a blue check mark beside it). 
 
 **I am asking that you please, please be considerate of this situation when grading my work!** 
 
@@ -109,7 +109,7 @@ fars_map_state(55, 2014)
 ```
 
 
-*Note: for some state numbers, the* `fars_map_state` *function will not work, for various reasons. A quick summary table of these is included below. For more details plus a full table of all 56 state numbers and corresponding state names, please see the package vignette. You can instruct R to build the vignette when installing from GitHub by specifying* `build_vignettes=TRUE` *when installing with* `install.github()`.
+*Note: for some state numbers, the* `fars_map_state` *function will not work, for various reasons. A quick summary table of these is included below. For more details plus a full table of all 56 state numbers and corresponding state names, please see the package vignette. You can instruct R to build the vignette when installing from GitHub by specifying* `build_vignettes=TRUE` *when installing with* `install_github`.
 
 ```{r, echo=FALSE}
 data.frame(Numbers = c(2,3,7,14,15,43,52), 
