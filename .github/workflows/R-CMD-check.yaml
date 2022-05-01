@@ -56,5 +56,5 @@ jobs:
       - name: Install dependencies
         run: |
           install.packages(c("remotes"),dependencies=TRUE)
-          remotes::install_cram("bit64")
+          remotes::install_cran("bit64")
         shell: Rscript {0}
